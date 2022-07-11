@@ -1,0 +1,31 @@
+<template>
+    <section class="list-container">
+        <ul class="clean-list">
+            <toy-preview v-for="toy in toys" :key="toy._id" :toy="toy" @remove="removeToy" />
+        </ul>
+    </section>
+</template>
+
+<script>
+import toyPreview from '../components/toy-preview.vue'
+export default {
+    name: 'appHome',
+    props: {
+        toys: {
+            type: Array,
+            required: true
+        }
+    },
+    methods: {
+        removeToy(toyId) {
+            this.$emit('remove', toyId)
+        }
+    },
+    components: {
+        toyPreview
+    }
+}
+</script>
+
+<style>
+</style>
