@@ -1,5 +1,5 @@
 <template>
-  <app-header />  
+  <app-header />
   <router-view />
 
 </template>
@@ -9,6 +9,10 @@ import appHeader from './components/app-header.vue'
 export default {
   name: 'App',
   data() {
+
+  },
+  created() {
+    this.$store.dispatch({ type: 'loadToys' })
 
   },
   components: {

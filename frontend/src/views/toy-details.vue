@@ -10,6 +10,12 @@
             </ul>
             </p>
             <p class="in-stock">In stock: <span>{{ getInStock }}</span></p>
+            <div class="reviews container">
+                <p>Reviews</p>
+                <ul>
+                    <li v-for="review in toy.reviews">{{ review }}</li>
+                </ul>
+            </div>
         </article>
         <button @click="goBack" class="btn btn-primary">go back</button>
     </section>

@@ -1,16 +1,14 @@
 <template>
+    <toy-filter @filtered="setFilter"/>
     <toy-list :toys="getToys" @remove="removeToy" />
 </template>
 
 <script>
 // import toyService from '../services/toy.service.vue'
 import toyList from '../components/toy-list.vue'
-
+import toyFilter from '../components/toy-filter.vue'
 export default {
     name: 'toyApp',
-    created() {
-        this.$store.dispatch({ type: 'loadToys' })
-    },
     computed: {
         getToys() {
             return this.$store.getters.toysForDisplay
@@ -18,12 +16,15 @@ export default {
     },
     methods: {
         removeToy(toyId) {
-            console.log('hi');
             this.$store.dispatch('removeToy', {toyId})
+        },
+        setFilter(filterBy) {
+            this.$store.dispatch({type: 'setFilterBy', filterBy})
         }
     },
     components: {
-        toyList
+        toyList,
+        toyFilter
     },
 }
 </script>

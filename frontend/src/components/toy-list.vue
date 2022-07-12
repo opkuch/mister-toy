@@ -1,8 +1,9 @@
 <template>
-    <section class="list-container">
+    <section class="main-app list-container">
         <ul class="clean-list">
             <toy-preview v-for="toy in toys" :key="toy._id" :toy="toy" @remove="removeToy" />
         </ul>
+        <router-link to="/toy/edit">Add toy</router-link>
     </section>
 </template>
 

@@ -31,6 +31,9 @@ export default {
           return JSON.parse(JSON.stringify(toys))
       }
     },
+    getLabels({ labels }) {
+      return JSON.parse(JSON.stringify(labels))
+    },
   },
   actions: {
     loadToys({ commit }) {
@@ -39,6 +42,7 @@ export default {
       })
     },
     saveToy({ commit }, { toy }) {
+      console.log(toy);
       const actionType = toy._id ? 'updateToy' : 'addToy'
       return toyService.save(toy).then((savedToy) => {
         commit({ type: actionType, toy: savedToy })
@@ -49,5 +53,10 @@ export default {
         commit({ type: 'removeToy', toyId })
       })
     },
+    setFilterBy({commit}, {filterBy}) {
+      return toyService.query(filterBy).then((toys => {
+        commit({type: 'setToys', toys})
+      }))
+    }
   },
 }
