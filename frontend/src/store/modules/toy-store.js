@@ -42,7 +42,6 @@ export default {
       })
     },
     saveToy({ commit }, { toy }) {
-      console.log(toy);
       const actionType = toy._id ? 'updateToy' : 'addToy'
       return toyService.save(toy).then((savedToy) => {
         commit({ type: actionType, toy: savedToy })

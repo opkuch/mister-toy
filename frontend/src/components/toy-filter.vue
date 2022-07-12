@@ -1,7 +1,9 @@
 <template>
-    <section class="filter-container">
+    <section class="flex justify-center filter-container">
         <div class="search">
-            <input type="text" @input="setFilter" v-model="filterBy.txt" placeholder="Search for a toy">
+            <label>
+                <input type="text" @input="setFilter" v-model="filterBy.txt" placeholder="Search for a toy">
+            </label>
             <label for="in-stock-filter">
                 <span>In stock</span>
             <input type="checkbox" id="in-stock-filter" @change="setFilter" v-model="filterBy.status">
@@ -19,6 +21,7 @@
 </template>
 
 <script>
+import { utilService } from '../services/util.service.js'
 export default {
     name: 'toyFilter',
     data() {

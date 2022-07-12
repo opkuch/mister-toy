@@ -9,7 +9,6 @@ module.exports = {
 
 function query(filterBy) {
   if (!toys) return
-  console.log(filterBy)
   const regex = new RegExp(filterBy.txt, 'i')
   let filteredToys = toys.filter((toy) => regex.test(toy.name))
   if (filterBy.sortBy) {

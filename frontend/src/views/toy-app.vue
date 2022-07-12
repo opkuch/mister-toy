@@ -4,7 +4,6 @@
 </template>
 
 <script>
-// import toyService from '../services/toy.service.vue'
 import toyList from '../components/toy-list.vue'
 import toyFilter from '../components/toy-filter.vue'
 export default {
@@ -19,7 +18,7 @@ export default {
             this.$store.dispatch('removeToy', {toyId})
         },
         setFilter(filterBy) {
-            this.$store.dispatch({type: 'setFilterBy', filterBy})
+           this.$store.dispatch({type: 'setFilterBy', filterBy})
         }
     },
     components: {

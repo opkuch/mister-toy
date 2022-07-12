@@ -10,7 +10,10 @@ app.use(express.static('public'))
 // app.use(cookieParser())
 app.use(express.json())
 app.use(cors())
-app.listen(3030, () => console.log('Server is ready at: http://localhost:3030'))
+
+const port = process.env.PORT || 3000;
+
+app.listen(port, () => console.log(`Server is ready at port: ${port}`))
 
 //LIST
 app.get('/api/toy', (req, res) => {

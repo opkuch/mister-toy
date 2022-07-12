@@ -1,7 +1,7 @@
 <template>
-    <section v-if="toy" class="toy-details">
+    <section v-if="toy" class="main-app flex flex-col align-center toy-details">
         <article>
-            <p><span class="fw-bold">ID:</span> {{ toy.id }}</p>
+            <p><span class="fw-bold">ID:</span> {{ toy._id }}</p>
             <p><span class="fw-bold">Name:</span> {{ toy.name }}</p>
             <p><span class="fw-bold">Price: </span> {{ toy.price }}</p>
             <p class="labels">Labels:
@@ -17,7 +17,7 @@
                 </ul>
             </div>
         </article>
-        <button @click="goBack" class="btn btn-primary">go back</button>
+        <router-link to="/toy">Back</router-link>
     </section>
 </template>
 
