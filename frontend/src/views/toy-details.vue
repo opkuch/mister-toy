@@ -13,7 +13,7 @@
             <div class="reviews container">
                 <p>Reviews</p>
                 <ul>
-                    <li v-for="review in toy.reviews">{{ review }}</li>
+                    <li v-for="review in toy.reviews" :key="review">{{ review }}</li>
                 </ul>
             </div>
         </article>

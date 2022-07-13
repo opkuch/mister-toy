@@ -1,6 +1,6 @@
 <template>
-    <toy-filter @filtered="setFilter"/>
-    <toy-list :toys="getToys" @remove="removeToy" />
+        <toy-filter @filtered="setFilter"/>
+        <toy-list :toys="getToys" @remove="removeToy" />  
 </template>
 
 <script>

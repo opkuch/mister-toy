@@ -1,10 +1,8 @@
 <template>
-    <section class="main-app flex flex-col align-center list-container">
-        <ul class="clean-list">
+    <section class="list-container">
             <toy-preview v-for="toy in toys" :key="toy._id" :toy="toy" @remove="removeToy" />
-        </ul>
-        <router-link to="/toy/edit">Add toy</router-link>
     </section>
+        <router-link class="add-link" to="/toy/edit">Add toy</router-link>
 </template>
 
 <script>

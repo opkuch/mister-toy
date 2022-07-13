@@ -8,7 +8,7 @@ const labels = [
   'Puzzle',
   'Outdoor',
 ]
-const BASE_URL = (process.env.NODE_ENV !== 'development') ? '/api/toy' : '//localhost:3000/api/toy';
+const BASE_URL = (process.env.NODE_ENV !== 'development') ? '/api/toy/' : '//localhost:3030/api/toy/';
 export const toyService = {
   query,
   getById,

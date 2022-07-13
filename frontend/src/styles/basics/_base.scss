@@ -1,0 +1,17 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Anek Telugu;
+}
+
+a {
+    color: darken($clr1, 8);
+    text-decoration: none;
+    &.active {
+        background-color: $clr1;
+        color: $clr2;
+    }
+}

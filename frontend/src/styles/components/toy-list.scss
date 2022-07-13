@@ -1,0 +1,11 @@
+.list-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(auto-fill, 1fr);
+    gap: 1rem;
+    h3 {
+        font-weight: 700;
+    }
+    justify-content: center;
+
+}
