@@ -1,5 +1,8 @@
 <template>
-  <el-card :body-style="{ padding: '0px' }">
+  <el-card class="card" :body-style="{ padding: '0px' }">
+    <img :src="getImgUrl" v-if="toy.imgUrl" />
+    <p v-else>No avaiable photo..</p>
+
     <section class="preview-container">
       <section class="prev-details">
         <div class="prev-header">
@@ -20,10 +23,6 @@
             >Remove</el-button
           >
         </div>
-      </section>
-      <section class="img-container">
-        <img :src="getImgUrl" v-if="toy.imgUrl" />
-        <p v-else>No avaiable photo..</p>
       </section>
     </section>
   </el-card>

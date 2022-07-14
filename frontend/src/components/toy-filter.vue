@@ -1,5 +1,5 @@
 <template>
-  <section class="main-layout flex justify-center filter-container">
+  <section class="main-layout flex filter-container">
     <div class="search">
       <label>
         <el-input
@@ -10,18 +10,20 @@
         />
       </label>
       <label for="in-stock-filter">
-        <span>In stock</span>
         <el-switch
+          class="stock-filter"
           id="in-stock-filter"
           @change="setFilter"
           v-model="filterBy.status"
+          style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949"
+          inline-prompt
+          active-text="In stock"
+          inactive-text="Out of stock"
+          size="large"
         />
       </label>
     </div>
     <div class="sort">
-      <label for="sort-by">
-        <span>Sort toys</span>
-      </label>
       <el-select id="sort-by" v-model="filterBy.sortBy" @change="setFilter">
         <el-option v-for="opt in sortOpts" :value="opt" :label="opt" :key="opt">
           {{ opt }}
@@ -32,7 +34,7 @@
 </template>
 
 <script>
-import {utilService} from '../services/util.service.js'
+import { utilService } from '../services/util.service.js'
 export default {
   name: 'toyFilter',
   data() {

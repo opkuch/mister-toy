@@ -1,5 +1,5 @@
 <template>
-  <header class="app-header flex align-center">
+  <header class="main-layout app-header flex">
     <section class="logo flex">
       <h1>Toys</h1>
       <svg

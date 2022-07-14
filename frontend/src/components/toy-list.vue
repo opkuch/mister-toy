@@ -1,5 +1,5 @@
 <template>
-    <section class="list-container">
+    <section class="main-layout list-container">
             <toy-preview v-for="toy in toys" :key="toy._id" :toy="toy" @remove="removeToy" />
     </section>
         <router-link class="add-link" to="/toy/edit">Add toy</router-link>

@@ -1,3 +1,52 @@
 .filter-container {
-    padding: 1rem;
+    padding-block: 1rem;
+    padding: 0.5rem;
+    flex-direction: row;
+    > * {
+        flex-basis: 50%;
+    }
+    .search::before {
+        content: 'FILTER TOYS';
+        display: flex;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity .5s;
+    }
+
+    .sort::before {
+        content: 'SORT TOYS';
+        display: flex;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity .5s;
+    }
+    .sort:hover::before, .search:hover::before  {
+        opacity: 1;
+    }
+
+    .sort {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .stock-filter::after {
+        content: 'Filter in/out of stock';
+        transition: all 1s;
+        z-index: -1;
+        min-width: 150px;
+        opacity: 0;
+        display: flex;
+        justify-content: center;
+        position: absolute;
+        top: 7px;
+        left: 0;
+    }
+    .stock-filter:hover::after {
+        background-color: lighten($clr1, 10%);
+        border-radius: 30px;
+        color: whitesmoke;
+        opacity: 1;
+        transform: translateX(40%);
+
+    }
 }
