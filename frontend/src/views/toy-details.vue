@@ -3,7 +3,7 @@
         <article>
             <p><span class="fw-bold">ID:</span> {{ toy._id }}</p>
             <p><span class="fw-bold">Name:</span> {{ toy.name }}</p>
-            <p><span class="fw-bold">Price: </span> {{ toy.price }}</p>
+            <p><span class="fw-bold">Price: </span> {{ $filters.currencyUSD(toy.price) }}</p>
             <p class="labels">Labels:
             <ul>
                 <li v-for="label in toy.labels" :key="label" class="clean-list">{{ label }}</li>

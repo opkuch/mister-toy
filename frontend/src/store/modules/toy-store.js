@@ -3,14 +3,55 @@ import { toyService } from '../../services/toy.service.js'
 export default {
   state: {
     toys: [],
-    filterBy: 'all',
+    labels: [
+      'On wheels',
+      'Box game',
+      'Art',
+      'Baby',
+      'Doll',
+      'Puzzle',
+      'Outdoor',
+    ]
+  },
+  getters: {
+    toysForDisplay({ toys }) {
+      return JSON.parse(JSON.stringify(toys))
+    },
+    getLabels({ labels }) {
+      return JSON.parse(JSON.stringify(labels))
+    },
+    toyStockCount({toys}) {
+      if (!toys) return
+      let toysPerStock = []
+      toysPerStock.push(toys.filter(toy => toy.inStock).length)
+      toysPerStock.push(toys.filter(toy => !toy.inStock).length)
+      console.log(toys.filter(toy => !toy.inStock).length)
+    },
+    getLabelsCount({ toys }) {
+      if (!toys) return
+      let labelsCountTmp = {}
+      let labelsCount = {}
+      toys.forEach((toy) => {
+        toy.labels.forEach((label) => {
+          if (!labelsCountTmp[label]) {
+            labelsCountTmp[label] = {'sumPrice': 0, 'toyCount': 0}
+          }
+          labelsCountTmp[label]['sumPrice'] += +toy.price
+          labelsCountTmp[label]['toyCount'] += 1
+        })
+        console.log(labelsCountTmp)
+      })
+      for (var label in labelsCountTmp) {
+        labelsCount[label] = labelsCountTmp[label]['sumPrice'] / labelsCountTmp[label]['toyCount']
+      }
+      console.log(labelsCount)
+      return labelsCount
+    },
+
   },
   mutations: {
     setToys(state, { toys }) {
       state.toys = toys
-    },
-    setFilter(state, { filterBy }) {
-      state.filterBy = filterBy
     },
     addToy(state, { toy }) {
       state.toys.push(toy)
@@ -24,38 +65,43 @@ export default {
       state.toys.splice(idx, 1)
     },
   },
-  getters: {
-    toysForDisplay({ toys, filterBy }) {
-      switch (filterBy) {
-        case 'all':
-          return JSON.parse(JSON.stringify(toys))
+  actions: {
+    async loadToys({ commit }) {
+      try {
+        var toys = await toyService.query()
+        commit({ type: 'setToys', toys })
+        return toys
+      } catch (err) {
+        console.log('couldnt get toys for display', err)
       }
     },
-    getLabels({ labels }) {
-      return JSON.parse(JSON.stringify(labels))
-    },
-  },
-  actions: {
-    loadToys({ commit }) {
-      toyService.query().then((toys) => {
-        commit({ type: 'setToys', toys })
-      })
-    },
-    saveToy({ commit }, { toy }) {
+    async saveToy({ commit }, { toy }) {
       const actionType = toy._id ? 'updateToy' : 'addToy'
-      return toyService.save(toy).then((savedToy) => {
+      try {
+        var savedToyId = await toyService.save(toy)
+        var savedToy = await toyService.getById(savedToyId)
         commit({ type: actionType, toy: savedToy })
-      })
+        return savedToy
+      } catch (err) {
+        console.log('couldnt save/update toy', err)
+      }
     },
-    removeToy({ commit }, { toyId }) {
-      return toyService.remove(toyId).then(() => {
+    async removeToy({ commit }, { toyId }) {
+      try {
+        await toyService.remove(toyId)
         commit({ type: 'removeToy', toyId })
-      })
+      } catch (err) {
+        console.log('couldnt remove toy', err)
+      }
     },
-    setFilterBy({commit}, {filterBy}) {
-      return toyService.query(filterBy).then((toys => {
-        commit({type: 'setToys', toys})
-      }))
-    }
+    async setFilterBy({ commit }, { filterBy }) {
+      try {
+        var toys = await toyService.query(filterBy)
+        commit({ type: 'setToys', toys })
+        return toys
+      } catch (err) {
+        console.log('couldnt get toys', err)
+      }
+    },
   },
 }

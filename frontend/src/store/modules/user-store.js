@@ -21,15 +21,9 @@ export default {
     },
   },
   mutations: {
-    updateOrder(state, { order }) {
-      const idx = state.user.orders.findIndex((o) => o._id === order._id)
-      state.user.orders.splice(idx, 1, order)
-    },
     setUser(state, { user }) {
       state.user = user
-    },
-    setUserBalance(state, { balance }) {
-      state.user.balance = balance
+      window.location.reload()
     },
     toggleModal(state, bool) {
       state.isSigninModal = bool
@@ -46,27 +40,6 @@ export default {
     },
   },
   actions: {
-    checkout({ commit, getters }) {
-      return userService
-        .addOrder(getters.cart, getters.cartTotal)
-        .then((user) => {
-          commit({ type: 'setUser', user })
-          commit({ type: 'clearCart' })
-          return user.balance
-        })
-    },
-    changeOrderStatus({ commit }, { orderId, status }) {
-      return userService.changeOrderStatus(orderId, status).then((order) => {
-        commit({ type: 'updateOrder', order })
-        return order
-      })
-    },
-    deposit({ commit }, { amount }) {
-      return userService.updateBalance(amount).then((balance) => {
-        commit({ type: 'setUserBalance', balance })
-        return balance
-      })
-    },
     async login({ commit }, { credentials }) {
       try {
         const user = await userService.login(credentials)

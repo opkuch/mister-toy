@@ -9,7 +9,7 @@
         </div>
         <div class="prev-content">
           <p class="price">
-            Price: <span>{{ toy.price }}</span>
+            Price: <span>{{ $filters.currencyUSD(toy.price) }}</span>
           </p>
           <p class="in-stock">
             In stock: <span>{{ getInStock }}</span>

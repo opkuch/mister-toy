@@ -1,14 +1,8 @@
 import axios from 'axios'
-const labels = [
-  'On wheels',
-  'Box game',
-  'Art',
-  'Baby',
-  'Doll',
-  'Puzzle',
-  'Outdoor',
-]
-const BASE_URL = (process.env.NODE_ENV !== 'development') ? '/api/toy/' : '//localhost:3030/api/toy/';
+const BASE_URL =
+  process.env.NODE_ENV !== 'development'
+    ? '/api/toy/'
+    : '//localhost:3030/api/toy/'
 const instance = axios.create({
   withCredentials: true,
   baseURL: BASE_URL,
@@ -20,26 +14,55 @@ export const toyService = {
   remove,
   save,
   getEmptyToy,
-  getLabels,
 }
 
-function query(filterBy) {
-   return instance.get(BASE_URL, { params: filterBy }).then((res) => res.data)
+async function query(
+  filterBy = {
+    txt: '',
+    sort: {
+      by: '',
+      direction: true
+    }
+  }
+) {
+  try {
+    const res = await instance.get(BASE_URL, { params: filterBy })
+    return res.data
+  } catch (err) {
+    console.log('cannot get toys', err)
+  }
 }
 
-function getById(toyId) {
-  return instance.get(BASE_URL + toyId).then((res) => res.data);
+async function getById(toyId) {
+  try {
+    const res = await instance.get(BASE_URL + toyId)
+    return res.data
+  } catch (err) {
+    console.log('cannot get toy', err)
+  }
 }
 
-function remove(toyId) {
-    return instance.delete(BASE_URL + toyId).then((res) => res.data);
+async function remove(toyId) {
+  try {
+    await instance.delete(BASE_URL + toyId)
+  } catch (err) {
+    console.log('cannot remove toy', err)
+  }
 }
 
-function save(toy) {
-   if (toy._id) {
-    return instance.put(BASE_URL + toy._id, toy).then((res) => res.data);
-  } else {
-    return instance.post(BASE_URL, toy).then((res) => res.data);
+async function save(toy) {
+  try {
+    let res
+    if (toy._id) {
+      res = await instance.put(BASE_URL + toy._id, toy)
+      return res.data
+    } else {
+      res = await instance.post(BASE_URL, toy)
+      console.log(res)
+      return res.data
+    }
+  } catch (err) {
+    console.log('cannot add/update toy', err)
   }
 }
 
@@ -52,8 +75,4 @@ function getEmptyToy() {
     imgUrl: '',
     inStock: true,
   }
-}
-
-function getLabels() {
-  return labels
 }

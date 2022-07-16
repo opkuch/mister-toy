@@ -49,6 +49,7 @@
         <router-link to="/">Home</router-link>
         <router-link to="/toy">Our Toys</router-link>
         <router-link to="/about">About</router-link>
+        <router-link v-show="isAdmin" to="/dashboard">Dashboard</router-link>
       </nav>
       <login-logout @login="login" @logout="logout" @signup="signup" />
     </section>
@@ -66,6 +67,7 @@ export default {
   },
   methods: {
     login(credentials) {
+      console.log(credentials);
       this.$emit('login', credentials)
     },
     logout() {
@@ -73,6 +75,9 @@ export default {
     },
     signup(signupInfo) {
       this.$emit('signup', signupInfo)
+    },
+    showDashboard() {
+      this.isShow = this.$store.getters.isAdmin
     }
   },
   components: {

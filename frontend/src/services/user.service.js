@@ -32,7 +32,6 @@ async function login(credentials) {
 }
 
 async function signup(signupInfo) {
-  console.log(signupInfo)
   try {
     const res = await instance.post(BASE_URL + 'signup', signupInfo)
     sessionStorage.setItem(STORAGE_KEY, JSON.stringify(res.data))
@@ -56,15 +55,3 @@ async function logout() {
 function getLoggedinUser() {
   return JSON.parse(sessionStorage.getItem(STORAGE_KEY))
 }
-
-// function getById(userId) {
-//     return axios.get('/api/user', {params: userId}).then(res => res.data)
-// }
-
-// function getUsers() {
-//   return axios.get('/api/users').then(res => res.data)
-// }
-
-// function removeUser(userId) {
-//   return axios.delete('/api/user/' + userId)
-// }

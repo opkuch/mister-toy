@@ -27,25 +27,32 @@
     .sort {
         display: flex;
         flex-direction: column;
-    }
 
-    .stock-filter::after {
-        content: 'Filter in/out of stock';
+    }
+    .sort-direction::after, .stock-filter::after {
         transition: all 1s;
         z-index: -1;
-        min-width: 150px;
+        min-width: 200px;
         opacity: 0;
         display: flex;
         justify-content: center;
         position: absolute;
         top: 7px;
         left: 0;
+
     }
-    .stock-filter:hover::after {
+    .sort-direction::after {
+        content: 'Ascending/Descending order'
+    }
+
+    .stock-filter::after {
+        content: 'Filter in/out of stock';
+    }
+    .stock-filter:hover::after, .sort-direction:hover::after {
         background-color: lighten($clr1, 10%);
-        border-radius: 30px;
+        border-radius: 5px;
         color: whitesmoke;
-        opacity: 1;
+        opacity: 0.7;
         transform: translateX(40%);
 
     }

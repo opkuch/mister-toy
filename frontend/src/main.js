@@ -13,6 +13,13 @@ import VueUniversalModal from 'vue-universal-modal';
 
 const app = createApp(App)
 
+app.config.globalProperties.$filters = {
+  currencyUSD(amount) {
+    // look implementation inside car-preview.vue
+    return '$' + amount
+  },
+}
+
 app.use(router)
 app.use(myStore)
 app.use(ElementPlus)

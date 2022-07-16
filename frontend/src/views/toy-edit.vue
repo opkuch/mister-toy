@@ -54,7 +54,7 @@ export default {
     },
     methods: {
         setLabels() {
-            this.labels = toyService.getLabels()
+            this.labels = this.$store.getters.getLabels
         },
         saveToy() {
             if (!this.toyToEdit.imgUrl) this.toyToEdit.imgUrl = 'default.png'

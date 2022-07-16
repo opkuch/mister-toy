@@ -15,15 +15,15 @@ export default {
   methods: {
     onLogin(credentials) {
       this.$store.dispatch({ type: 'login', credentials })
-      window.location.reload()
+      // window.location.reload()
     },
     onLogout() {
       this.$store.dispatch({ type: 'logout' })
-      window.location.reload()
+      // window.location.reload()
     },
     onSignup(signupInfo) {
       this.$store.dispatch({ type: 'signup', signupInfo })
-      window.location.reload()
+      // window.location.reload()
     },
   },
   components: {

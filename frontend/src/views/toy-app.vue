@@ -1,9 +1,9 @@
 <template>
   <div v-if="loggedUser && getToys" >
-    <toy-filter @filtered="setFilter" />
-    <toy-list :toys="getToys" @remove="removeToy" />
+    <toy-filter @filtered="onSetFilter" />
+    <toy-list :toys="getToys" @remove="onRemoveToy" />
   </div>
-  <div v-else>
+  <div class="toy-app-login flex align-center flex-col" v-else>
     <h1>Are you signed up already?</h1>
     <login-logout @login="onLogin" @logout="onLogout" @signup="onSignup" />
   </div>
@@ -30,24 +30,22 @@ export default {
     },
   },
   methods: {
-    removeToy(toyId) {
+    onRemoveToy(toyId) {
       this.$store.dispatch('removeToy', { toyId })
     },
-    setFilter(filterBy) {
+    onSetFilter(filterBy) {
+      filterBy.sort.direction ? filterBy.sort.direction = 1 : filterBy.sort.direction = -1
       this.$store.dispatch({ type: 'setFilterBy', filterBy })
     },
     onLogin(credentials) {
       console.log(credentials);
       this.$store.dispatch({ type: 'login', credentials })
-      window.location.reload()
     },
     onLogout() {
       this.$store.dispatch({ type: 'logout' })
-      window.location.reload()
     },
     onSignup(signupInfo) {
       this.$store.dispatch({ type: 'signup', signupInfo })
-      window.location.reload()
     }
   },
   components: {

@@ -15,7 +15,7 @@
           id="in-stock-filter"
           @change="setFilter"
           v-model="filterBy.status"
-          style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949"
+          style="--el-switch-on-color: #13ce66; --el-switch-off-color: #224435"
           inline-prompt
           active-text="In"
           inactive-text="Out"
@@ -24,11 +24,27 @@
       </label>
     </div>
     <div class="sort">
-      <el-select id="sort-by" v-model="filterBy.sortBy" @change="setFilter">
-        <el-option v-for="opt in sortOpts" :value="opt" :label="opt" :key="opt">
+      <el-select id="sort-by" v-model="filterBy.sort.by" @change="setFilter">
+        <el-option
+          v-for="opt in sortOpts"
+          :value="opt.toLowerCase()"
+          :label="opt"
+          :key="opt"
+        >
           {{ opt }}
         </el-option>
       </el-select>
+      <label for="sort-direction">
+        <el-switch
+          class="sort-direction"
+          id="sort-direction"
+          @change="setFilter"
+          v-model="filterBy.sort.direction"
+          style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff8500"
+          inline-prompt
+          size="large"
+        />
+      </label>
     </div>
   </section>
 </template>
@@ -40,9 +56,11 @@ export default {
   data() {
     return {
       filterBy: {
-        txt: null,
-        status: null,
-        sortBy: null,
+        txt: '',
+      sort: {
+        by: '',
+        direction: true,
+      },
       },
       sortOpts: ['Name', 'Price', 'Time added'],
     }
