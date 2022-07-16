@@ -17,8 +17,8 @@
           v-model="filterBy.status"
           style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949"
           inline-prompt
-          active-text="In stock"
-          inactive-text="Out of stock"
+          active-text="In"
+          inactive-text="Out"
           size="large"
         />
       </label>

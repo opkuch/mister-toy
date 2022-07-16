@@ -12,7 +12,7 @@
             <label for="toy-labels">
                 <span>Labels: </span>
                 <select v-model="toyToEdit.labels" id="toy-labels" multiple>
-                    <option v-for="label in labels" :value="label">{{ label }}</option>
+                    <option v-for="label in labels" :value="label" :key="label">{{ label }}</option>
                 </select>
             </label>
             <label for="in-stock">
@@ -21,6 +21,10 @@
                     <option :value="true">Yes</option>
                     <option :value="false">No</option>
                 </select>
+            </label>
+            <label for="toy-img">
+                <span>Image url: </span>
+                <input type="text" id="toy-img" v-model="toyToEdit.imgUrl">
             </label>
             <button>Save</button>
         </form>
@@ -53,6 +57,7 @@ export default {
             this.labels = toyService.getLabels()
         },
         saveToy() {
+            if (!this.toyToEdit.imgUrl) this.toyToEdit.imgUrl = 'default.png'
             this.$store.dispatch({ type: 'saveToy', toy: this.toyToEdit })
             this.toyToEdit = toyService.getEmptyToy()
             this.$router.push('/toy')

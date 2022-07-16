@@ -1,9 +1,15 @@
 .app-header {
     justify-content: space-between;
     border-radius: 3px;
-    // .main-nav {
-    //     margin-inline-end: 5rem;
-    // }
+    .nav-container {
+        display: flex;
+        justify-content: flex-end;
+        flex-grow: 1;
+        margin-inline-end: 3rem;
+    }
+    .main-nav {
+        align-self: center;
+    }
     .main-nav a {
         margin-inline-start: 1rem;
         padding-inline: 0.2rem;
@@ -12,15 +18,16 @@
     }
     .router-link-exact-active {
         transition: all 200ms;
-        // background-color: rgba($clr1, 0.25);
         border-radius: 2px;
-        border-bottom: 1px solid $clr1;
+        box-shadow: 0 3px 0 $clr1;
+        border-radius: 50%;
     }
 
     .logo {
         font-size: 2rem ;
         font-family: Mr Dafoe;
         text-transform: lowercase;
+        align-items: center;
     }
 
     .logo svg {

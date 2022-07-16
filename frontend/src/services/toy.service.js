@@ -9,7 +9,10 @@ const labels = [
   'Outdoor',
 ]
 const BASE_URL = (process.env.NODE_ENV !== 'development') ? '/api/toy/' : '//localhost:3030/api/toy/';
-// const axios = Axios.create({withCredentials: true})
+const instance = axios.create({
+  withCredentials: true,
+  baseURL: BASE_URL,
+})
 
 export const toyService = {
   query,
@@ -21,22 +24,22 @@ export const toyService = {
 }
 
 function query(filterBy) {
-   return axios.get(BASE_URL, { params: filterBy }).then((res) => res.data)
+   return instance.get(BASE_URL, { params: filterBy }).then((res) => res.data)
 }
 
 function getById(toyId) {
-  return axios.get(BASE_URL + toyId).then((res) => res.data);
+  return instance.get(BASE_URL + toyId).then((res) => res.data);
 }
 
 function remove(toyId) {
-    return axios.delete(BASE_URL + toyId).then((res) => res.data);
+    return instance.delete(BASE_URL + toyId).then((res) => res.data);
 }
 
 function save(toy) {
    if (toy._id) {
-    return axios.put(BASE_URL + toy._id, toy).then((res) => res.data);
+    return instance.put(BASE_URL + toy._id, toy).then((res) => res.data);
   } else {
-    return axios.post(BASE_URL, toy).then((res) => res.data);
+    return instance.post(BASE_URL, toy).then((res) => res.data);
   }
 }
 
@@ -46,6 +49,7 @@ function getEmptyToy() {
     price: null,
     labels: [],
     createdAt: Date.now(),
+    imgUrl: '',
     inStock: true,
   }
 }

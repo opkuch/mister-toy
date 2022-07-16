@@ -1,9 +1,8 @@
 <template>
   <el-card class="card" :body-style="{ padding: '0px' }">
-    <img :src="getImgUrl" v-if="toy.imgUrl" />
-    <p v-else>No avaiable photo..</p>
-
     <section class="preview-container">
+      <img :src="getImgUrl" v-if="toy.imgUrl" />
+      <p v-else>No avaiable photo..</p>
       <section class="prev-details">
         <div class="prev-header">
           <h3>{{ toy.name }}</h3>
@@ -18,8 +17,8 @@
         </div>
         <div class="prev-actions">
           <el-button @click="goToDetail" class="detail-btn">Details</el-button>
-          <el-button @click="goToEdit" class="edit-btn">Edit</el-button>
-          <el-button @click="removeToy(toy._id)" class="remove-btn"
+          <el-button v-show="isAdmin" @click="goToEdit" class="edit-btn">Edit</el-button>
+          <el-button v-show="isAdmin" @click="removeToy(toy._id)" class="remove-btn"
             >Remove</el-button
           >
         </div>
@@ -56,6 +55,9 @@ export default {
       return new URL('../assets/toy-img/' + this.toy.imgUrl, import.meta.url)
         .href
     },
+    isAdmin() {
+      return this.$store.getters.isAdmin
+    }
   },
 }
 </script>

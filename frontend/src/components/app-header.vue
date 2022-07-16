@@ -1,7 +1,7 @@
 <template>
   <header class="main-layout app-header flex">
     <section class="logo flex">
-      <h1>Toys</h1>
+      <h1>missToys</h1>
       <svg
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"
@@ -44,18 +44,40 @@
         </g>
       </svg>
     </section>
-    <nav class="main-nav flex">
-      <router-link to="/">Home</router-link>
-      <router-link to="/toy">Our Toys</router-link>
-      <!-- <router-link to="/about">About</router-link> -->
-    </nav>
+    <section class="nav-container">
+      <nav class="main-nav flex">
+        <router-link to="/">Home</router-link>
+        <router-link to="/toy">Our Toys</router-link>
+        <router-link to="/about">About</router-link>
+      </nav>
+      <login-logout @login="login" @logout="logout" @signup="signup" />
+    </section>
   </header>
 </template>
 
 <script>
+import loginLogout from '../components/login-logout.vue'
 export default {
   name: 'appHome',
-  components: {},
+  data() {
+    return {
+      isShow: false,
+    }
+  },
+  methods: {
+    login(credentials) {
+      this.$emit('login', credentials)
+    },
+    logout() {
+      this.$emit('logout')
+    },
+    signup(signupInfo) {
+      this.$emit('signup', signupInfo)
+    }
+  },
+  components: {
+    loginLogout,
+  },
 }
 </script>
 

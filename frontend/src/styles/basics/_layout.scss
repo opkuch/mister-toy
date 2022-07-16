@@ -1,6 +1,6 @@
 .main-layout {
     margin-inline: 2.5rem;
-
+    margin-block-start: 1rem;
     @include for-narrow-layout {
         // @include layoutGTC($break-narrow);
     }

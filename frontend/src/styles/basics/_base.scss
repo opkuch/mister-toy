@@ -10,6 +10,7 @@ body {
 a {
     color: darken($clr1, 8);
     text-decoration: none;
+    cursor: pointer;
     &.active {
         background-color: $clr1;
         color: $clr2;
@@ -18,7 +19,7 @@ a {
 
 .card {
     img {
-        max-width: 150px;
-        max-height: 150px;
+        max-height: 165px;
+        min-width: 180px;
     }
 }
