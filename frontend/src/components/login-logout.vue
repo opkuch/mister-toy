@@ -112,13 +112,13 @@ export default {
       this.$emit('login', this.credentials)
       this.credentials.username = null
       this.credentials.password = null
-      setTimeout(() => {
-        const user = this.$store.getters.user
-        if (user) {
-          this.loggedinUser = user
-          this.closeModal()
-        }
-      }, 1500)
+      // setTimeout(() => {
+      //   const user = this.$store.getters.user
+      //   if (user) {
+      //     this.loggedinUser = user
+      //     // this.closeModal()
+      //   }
+      // }, 1500)
     },
     logout() {
       this.$emit('logout')

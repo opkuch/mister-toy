@@ -44,7 +44,6 @@ async function signup(signupInfo) {
 async function logout() {
   try {
     const res = await instance.post(BASE_URL + 'logout')
-    console.log(res.data)
     sessionStorage.removeItem(STORAGE_KEY)
     return res.data
   } catch(err) {
